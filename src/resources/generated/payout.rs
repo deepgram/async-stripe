@@ -12,7 +12,7 @@ use crate::resources::{BalanceTransaction, BankAccount, Card, Currency};
 /// The resource representing a Stripe "Payout".
 ///
 /// For more details see <https://stripe.com/docs/api/payouts/object>
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct Payout {
     /// Unique identifier for the object.
     pub id: PayoutId,
@@ -301,6 +301,11 @@ pub enum PayoutDestinationUnion {
     BankAccount(BankAccount),
     Card(Card),
 }
+impl std::default::Default for PayoutDestinationUnion {
+    fn default() -> Self {
+        Self::BankAccount(Default::default())
+    }
+}
 
 /// An enum representing the possible values of an `CreatePayout`'s `method` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -328,6 +333,11 @@ impl AsRef<str> for PayoutMethod {
 impl std::fmt::Display for PayoutMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PayoutMethod {
+    fn default() -> Self {
+        Self::Instant
     }
 }
 
@@ -361,6 +371,11 @@ impl std::fmt::Display for PayoutSourceType {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PayoutSourceType {
+    fn default() -> Self {
+        Self::BankAccount
+    }
+}
 
 /// An enum representing the possible values of an `Payout`'s `type` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -388,5 +403,10 @@ impl AsRef<str> for PayoutType {
 impl std::fmt::Display for PayoutType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PayoutType {
+    fn default() -> Self {
+        Self::BankAccount
     }
 }

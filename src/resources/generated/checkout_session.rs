@@ -14,7 +14,7 @@ use crate::resources::{
 };
 
 /// The resource representing a Stripe "Session".
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CheckoutSession {
     /// Unique identifier for the object.
     ///
@@ -222,7 +222,7 @@ impl Object for CheckoutSession {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CheckoutSessionPaymentMethodOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub acss_debit: Option<Box<CheckoutAcssDebitPaymentMethodOptions>>,
@@ -234,7 +234,7 @@ pub struct CheckoutSessionPaymentMethodOptions {
     pub oxxo: Option<Box<PaymentMethodOptionsOxxo>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CheckoutAcssDebitPaymentMethodOptions {
     /// Currency supported by the bank account.
     ///
@@ -250,7 +250,7 @@ pub struct CheckoutAcssDebitPaymentMethodOptions {
     pub verification_method: Option<Box<CheckoutAcssDebitPaymentMethodOptionsVerificationMethod>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CheckoutAcssDebitMandateOptions {
     /// A URL for custom mandate text.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -277,14 +277,14 @@ pub struct CheckoutAcssDebitMandateOptions {
     pub transaction_type: Option<Box<CheckoutAcssDebitMandateOptionsTransactionType>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionAfterExpiration {
     /// When set, configuration used to recover the Checkout Session on expiry.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub recovery: Option<Box<PaymentPagesCheckoutSessionAfterExpirationRecovery>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionAfterExpirationRecovery {
     /// Enables user redeemable promotion codes on the recovered Checkout Sessions.
     ///
@@ -306,7 +306,7 @@ pub struct PaymentPagesCheckoutSessionAfterExpirationRecovery {
     pub url: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionAutomaticTax {
     /// Indicates whether automatic tax is enabled for the session.
     pub enabled: bool,
@@ -316,7 +316,7 @@ pub struct PaymentPagesCheckoutSessionAutomaticTax {
     pub status: Option<Box<PaymentPagesCheckoutSessionAutomaticTaxStatus>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionConsent {
     /// If `opt_in`, the customer consents to receiving promotional communications
     /// from the merchant about this Checkout Session.
@@ -324,7 +324,7 @@ pub struct PaymentPagesCheckoutSessionConsent {
     pub promotions: Option<Box<PaymentPagesCheckoutSessionConsentPromotions>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionConsentCollection {
     /// If set to `auto`, enables the collection of customer consent for promotional communications.
     ///
@@ -334,7 +334,7 @@ pub struct PaymentPagesCheckoutSessionConsentCollection {
     pub promotions: Option<Box<PaymentPagesCheckoutSessionConsentCollectionPromotions>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionCustomerDetails {
     /// The email associated with the Customer, if one exists, on the Checkout Session at the time of checkout or at time of session expiry.
     /// Otherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.
@@ -354,13 +354,13 @@ pub struct PaymentPagesCheckoutSessionCustomerDetails {
     pub tax_ids: Option<Box<Vec<PaymentPagesCheckoutSessionTaxId>>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionPhoneNumberCollection {
     /// Indicates whether phone number collection is enabled for the session.
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionShippingAddressCollection {
     /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for
     /// shipping locations.
@@ -370,7 +370,7 @@ pub struct PaymentPagesCheckoutSessionShippingAddressCollection {
         Vec<PaymentPagesCheckoutSessionShippingAddressCollectionAllowedCountries>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionShippingOption {
     /// A non-negative integer in cents representing how much to charge.
     pub shipping_amount: i64,
@@ -379,7 +379,7 @@ pub struct PaymentPagesCheckoutSessionShippingOption {
     pub shipping_rate: Expandable<ShippingRate>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionTaxId {
     /// The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`.
     #[serde(rename = "type")]
@@ -390,13 +390,13 @@ pub struct PaymentPagesCheckoutSessionTaxId {
     pub value: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionTaxIdCollection {
     /// Indicates whether tax ID collection is enabled for the session.
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionTotalDetails {
     /// This is the sum of all the line item discounts.
     pub amount_discount: i64,
@@ -412,7 +412,7 @@ pub struct PaymentPagesCheckoutSessionTotalDetails {
     pub breakdown: Option<Box<PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown {
     /// The aggregated line item discounts.
     pub discounts: Vec<LineItemsDiscountAmount>,
@@ -421,7 +421,7 @@ pub struct PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown {
     pub taxes: Vec<LineItemsTaxAmount>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct LineItemsDiscountAmount {
     /// The amount discounted.
     pub amount: i64,
@@ -429,7 +429,7 @@ pub struct LineItemsDiscountAmount {
     pub discount: Discount,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct LineItemsTaxAmount {
     /// Amount of tax applied for this rate.
     pub amount: i64,
@@ -695,24 +695,24 @@ impl<'a> ListCheckoutSessions<'a> {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionAfterExpiration {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub recovery: Option<Box<CreateCheckoutSessionAfterExpirationRecovery>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionAutomaticTax {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionConsentCollection {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub promotions: Option<Box<CreateCheckoutSessionConsentCollectionPromotions>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionCustomerUpdate {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address: Option<Box<CreateCheckoutSessionCustomerUpdateAddress>>,
@@ -724,7 +724,7 @@ pub struct CreateCheckoutSessionCustomerUpdate {
     pub shipping: Option<Box<CreateCheckoutSessionCustomerUpdateShipping>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionDiscounts {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub coupon: Option<Box<String>>,
@@ -733,7 +733,7 @@ pub struct CreateCheckoutSessionDiscounts {
     pub promotion_code: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionLineItems {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub adjustable_quantity: Option<Box<CreateCheckoutSessionLineItemsAdjustableQuantity>>,
@@ -757,7 +757,7 @@ pub struct CreateCheckoutSessionLineItems {
     pub tax_rates: Option<Box<Vec<String>>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentIntentData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub application_fee_amount: Option<Box<i64>>,
@@ -796,7 +796,7 @@ pub struct CreateCheckoutSessionPaymentIntentData {
     pub transfer_group: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub acss_debit: Option<Box<CreateCheckoutSessionPaymentMethodOptionsAcssDebit>>,
@@ -811,12 +811,12 @@ pub struct CreateCheckoutSessionPaymentMethodOptions {
     pub wechat_pay: Option<Box<CreateCheckoutSessionPaymentMethodOptionsWechatPay>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPhoneNumberCollection {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionSetupIntentData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<Box<String>>,
@@ -828,12 +828,12 @@ pub struct CreateCheckoutSessionSetupIntentData {
     pub on_behalf_of: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingAddressCollection {
     pub allowed_countries: Vec<CreateCheckoutSessionShippingAddressCollectionAllowedCountries>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub shipping_rate: Option<Box<String>>,
@@ -842,7 +842,7 @@ pub struct CreateCheckoutSessionShippingOptions {
     pub shipping_rate_data: Option<Box<CreateCheckoutSessionShippingOptionsShippingRateData>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionSubscriptionData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub application_fee_percent: Option<Box<f64>>,
@@ -866,12 +866,12 @@ pub struct CreateCheckoutSessionSubscriptionData {
     pub trial_period_days: Option<Box<u32>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionTaxIdCollection {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionAfterExpirationRecovery {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub allow_promotion_codes: Option<Box<bool>>,
@@ -879,7 +879,7 @@ pub struct CreateCheckoutSessionAfterExpirationRecovery {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionLineItemsAdjustableQuantity {
     pub enabled: bool,
 
@@ -890,7 +890,7 @@ pub struct CreateCheckoutSessionLineItemsAdjustableQuantity {
     pub minimum: Option<Box<i64>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionLineItemsPriceData {
     pub currency: Currency,
 
@@ -913,7 +913,7 @@ pub struct CreateCheckoutSessionLineItemsPriceData {
     pub unit_amount_decimal: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentIntentDataShipping {
     pub address: CreateCheckoutSessionPaymentIntentDataShippingAddress,
 
@@ -929,7 +929,7 @@ pub struct CreateCheckoutSessionPaymentIntentDataShipping {
     pub tracking_number: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentIntentDataTransferData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub amount: Option<Box<i64>>,
@@ -937,7 +937,7 @@ pub struct CreateCheckoutSessionPaymentIntentDataTransferData {
     pub destination: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptionsAcssDebit {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub currency: Option<Currency>,
@@ -951,19 +951,19 @@ pub struct CreateCheckoutSessionPaymentMethodOptionsAcssDebit {
         Option<Box<CreateCheckoutSessionPaymentMethodOptionsAcssDebitVerificationMethod>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptionsBoleto {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub expires_after_days: Option<Box<u32>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptionsOxxo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub expires_after_days: Option<Box<u32>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptionsWechatPay {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub app_id: Option<Box<String>>,
@@ -971,7 +971,7 @@ pub struct CreateCheckoutSessionPaymentMethodOptionsWechatPay {
     pub client: CreateCheckoutSessionPaymentMethodOptionsWechatPayClient,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptionsShippingRateData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub delivery_estimate:
@@ -996,7 +996,7 @@ pub struct CreateCheckoutSessionShippingOptionsShippingRateData {
     pub type_: Option<Box<CreateCheckoutSessionShippingOptionsShippingRateDataType>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionSubscriptionDataItems {
     pub plan: String,
 
@@ -1007,7 +1007,7 @@ pub struct CreateCheckoutSessionSubscriptionDataItems {
     pub tax_rates: Option<Box<Vec<String>>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionSubscriptionDataTransferData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub amount_percent: Option<Box<f64>>,
@@ -1015,7 +1015,7 @@ pub struct CreateCheckoutSessionSubscriptionDataTransferData {
     pub destination: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionLineItemsPriceDataProductData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<Box<String>>,
@@ -1032,7 +1032,7 @@ pub struct CreateCheckoutSessionLineItemsPriceDataProductData {
     pub tax_code: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionLineItemsPriceDataRecurring {
     pub interval: CreateCheckoutSessionLineItemsPriceDataRecurringInterval,
 
@@ -1040,7 +1040,7 @@ pub struct CreateCheckoutSessionLineItemsPriceDataRecurring {
     pub interval_count: Option<Box<u64>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentIntentDataShippingAddress {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub city: Option<Box<String>>,
@@ -1060,7 +1060,7 @@ pub struct CreateCheckoutSessionPaymentIntentDataShippingAddress {
     pub state: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub custom_mandate_url: Option<Box<String>>,
@@ -1084,7 +1084,7 @@ pub struct CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptions {
     >,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimate {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub maximum:
@@ -1095,21 +1095,21 @@ pub struct CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimate 
         Option<Box<CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMinimum>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptionsShippingRateDataFixedAmount {
     pub amount: i64,
 
     pub currency: Currency,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMaximum {
     pub unit: CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMaximumUnit,
 
     pub value: i64,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMinimum {
     pub unit: CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMinimumUnit,
 
@@ -1144,6 +1144,11 @@ impl std::fmt::Display for CheckoutAcssDebitMandateOptionsDefaultFor {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutAcssDebitMandateOptionsDefaultFor {
+    fn default() -> Self {
+        Self::Invoice
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutAcssDebitMandateOptions`'s `payment_schedule` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1175,6 +1180,11 @@ impl std::fmt::Display for CheckoutAcssDebitMandateOptionsPaymentSchedule {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutAcssDebitMandateOptionsPaymentSchedule {
+    fn default() -> Self {
+        Self::Combined
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutAcssDebitMandateOptions`'s `transaction_type` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1202,6 +1212,11 @@ impl AsRef<str> for CheckoutAcssDebitMandateOptionsTransactionType {
 impl std::fmt::Display for CheckoutAcssDebitMandateOptionsTransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CheckoutAcssDebitMandateOptionsTransactionType {
+    fn default() -> Self {
+        Self::Business
     }
 }
 
@@ -1237,6 +1252,11 @@ impl std::fmt::Display for CheckoutAcssDebitPaymentMethodOptionsVerificationMeth
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutAcssDebitPaymentMethodOptionsVerificationMethod {
+    fn default() -> Self {
+        Self::Automatic
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutSession`'s `billing_address_collection` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1266,6 +1286,11 @@ impl std::fmt::Display for CheckoutSessionBillingAddressCollection {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutSessionBillingAddressCollection {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutSession`'s `customer_creation` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1293,6 +1318,11 @@ impl AsRef<str> for CheckoutSessionCustomerCreation {
 impl std::fmt::Display for CheckoutSessionCustomerCreation {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CheckoutSessionCustomerCreation {
+    fn default() -> Self {
+        Self::Always
     }
 }
 
@@ -1408,6 +1438,11 @@ impl std::fmt::Display for CheckoutSessionLocale {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutSessionLocale {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutSession`'s `mode` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1437,6 +1472,11 @@ impl AsRef<str> for CheckoutSessionMode {
 impl std::fmt::Display for CheckoutSessionMode {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CheckoutSessionMode {
+    fn default() -> Self {
+        Self::Payment
     }
 }
 
@@ -1470,6 +1510,11 @@ impl std::fmt::Display for CheckoutSessionPaymentStatus {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutSessionPaymentStatus {
+    fn default() -> Self {
+        Self::NoPaymentRequired
+    }
+}
 
 /// An enum representing the possible values of an `CheckoutSession`'s `status` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1499,6 +1544,11 @@ impl AsRef<str> for CheckoutSessionStatus {
 impl std::fmt::Display for CheckoutSessionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CheckoutSessionStatus {
+    fn default() -> Self {
+        Self::Complete
     }
 }
 
@@ -1534,6 +1584,11 @@ impl std::fmt::Display for CheckoutSessionSubmitType {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CheckoutSessionSubmitType {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionConsentCollection`'s `promotions` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1559,6 +1614,11 @@ impl AsRef<str> for CreateCheckoutSessionConsentCollectionPromotions {
 impl std::fmt::Display for CreateCheckoutSessionConsentCollectionPromotions {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionConsentCollectionPromotions {
+    fn default() -> Self {
+        Self::Auto
     }
 }
 
@@ -1590,6 +1650,11 @@ impl std::fmt::Display for CreateCheckoutSessionCustomerUpdateAddress {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionCustomerUpdateAddress {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionCustomerUpdate`'s `name` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1619,6 +1684,11 @@ impl std::fmt::Display for CreateCheckoutSessionCustomerUpdateName {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionCustomerUpdateName {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionCustomerUpdate`'s `shipping` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1646,6 +1716,11 @@ impl AsRef<str> for CreateCheckoutSessionCustomerUpdateShipping {
 impl std::fmt::Display for CreateCheckoutSessionCustomerUpdateShipping {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionCustomerUpdateShipping {
+    fn default() -> Self {
+        Self::Auto
     }
 }
 
@@ -1681,6 +1756,11 @@ impl std::fmt::Display for CreateCheckoutSessionLineItemsPriceDataRecurringInter
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionLineItemsPriceDataRecurringInterval {
+    fn default() -> Self {
+        Self::Day
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionLineItemsPriceData`'s `tax_behavior` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1712,6 +1792,11 @@ impl std::fmt::Display for CreateCheckoutSessionLineItemsPriceDataTaxBehavior {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionLineItemsPriceDataTaxBehavior {
+    fn default() -> Self {
+        Self::Exclusive
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionPaymentIntentData`'s `capture_method` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1739,6 +1824,11 @@ impl AsRef<str> for CreateCheckoutSessionPaymentIntentDataCaptureMethod {
 impl std::fmt::Display for CreateCheckoutSessionPaymentIntentDataCaptureMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionPaymentIntentDataCaptureMethod {
+    fn default() -> Self {
+        Self::Automatic
     }
 }
 
@@ -1770,6 +1860,11 @@ impl std::fmt::Display for CreateCheckoutSessionPaymentIntentDataSetupFutureUsag
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionPaymentIntentDataSetupFutureUsage {
+    fn default() -> Self {
+        Self::OffSession
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptions`'s `default_for` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1799,6 +1894,13 @@ impl std::fmt::Display
 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default
+    for CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptionsDefaultFor
+{
+    fn default() -> Self {
+        Self::Invoice
     }
 }
 
@@ -1836,6 +1938,13 @@ impl std::fmt::Display
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptionsPaymentSchedule
+{
+    fn default() -> Self {
+        Self::Combined
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptions`'s `transaction_type` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1867,6 +1976,13 @@ impl std::fmt::Display
 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default
+    for CreateCheckoutSessionPaymentMethodOptionsAcssDebitMandateOptionsTransactionType
+{
+    fn default() -> Self {
+        Self::Business
     }
 }
 
@@ -1906,6 +2022,13 @@ impl std::fmt::Display for CreateCheckoutSessionPaymentMethodOptionsAcssDebitVer
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for CreateCheckoutSessionPaymentMethodOptionsAcssDebitVerificationMethod
+{
+    fn default() -> Self {
+        Self::Automatic
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionPaymentMethodOptionsWechatPay`'s `client` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1935,6 +2058,11 @@ impl AsRef<str> for CreateCheckoutSessionPaymentMethodOptionsWechatPayClient {
 impl std::fmt::Display for CreateCheckoutSessionPaymentMethodOptionsWechatPayClient {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionPaymentMethodOptionsWechatPayClient {
+    fn default() -> Self {
+        Self::Android
     }
 }
 
@@ -1996,6 +2124,11 @@ impl AsRef<str> for CreateCheckoutSessionPaymentMethodTypes {
 impl std::fmt::Display for CreateCheckoutSessionPaymentMethodTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionPaymentMethodTypes {
+    fn default() -> Self {
+        Self::AcssDebit
     }
 }
 
@@ -2734,6 +2867,11 @@ impl std::fmt::Display for CreateCheckoutSessionShippingAddressCollectionAllowed
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionShippingAddressCollectionAllowedCountries {
+    fn default() -> Self {
+        Self::Ac
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMaximum`'s `unit` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -2771,6 +2909,13 @@ impl std::fmt::Display
 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default
+    for CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMaximumUnit
+{
+    fn default() -> Self {
+        Self::BusinessDay
     }
 }
 
@@ -2812,6 +2957,13 @@ impl std::fmt::Display
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for CreateCheckoutSessionShippingOptionsShippingRateDataDeliveryEstimateMinimumUnit
+{
+    fn default() -> Self {
+        Self::BusinessDay
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionShippingOptionsShippingRateData`'s `tax_behavior` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -2849,6 +3001,11 @@ impl std::fmt::Display for CreateCheckoutSessionShippingOptionsShippingRateDataT
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateCheckoutSessionShippingOptionsShippingRateDataTaxBehavior {
+    fn default() -> Self {
+        Self::Exclusive
+    }
+}
 
 /// An enum representing the possible values of an `CreateCheckoutSessionShippingOptionsShippingRateData`'s `type` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -2874,6 +3031,11 @@ impl AsRef<str> for CreateCheckoutSessionShippingOptionsShippingRateDataType {
 impl std::fmt::Display for CreateCheckoutSessionShippingOptionsShippingRateDataType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CreateCheckoutSessionShippingOptionsShippingRateDataType {
+    fn default() -> Self {
+        Self::FixedAmount
     }
 }
 
@@ -2909,6 +3071,11 @@ impl std::fmt::Display for PaymentPagesCheckoutSessionAutomaticTaxStatus {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PaymentPagesCheckoutSessionAutomaticTaxStatus {
+    fn default() -> Self {
+        Self::Complete
+    }
+}
 
 /// An enum representing the possible values of an `PaymentPagesCheckoutSessionConsentCollection`'s `promotions` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -2934,6 +3101,11 @@ impl AsRef<str> for PaymentPagesCheckoutSessionConsentCollectionPromotions {
 impl std::fmt::Display for PaymentPagesCheckoutSessionConsentCollectionPromotions {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PaymentPagesCheckoutSessionConsentCollectionPromotions {
+    fn default() -> Self {
+        Self::Auto
     }
 }
 
@@ -2965,6 +3137,11 @@ impl std::fmt::Display for PaymentPagesCheckoutSessionConsentPromotions {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PaymentPagesCheckoutSessionConsentPromotions {
+    fn default() -> Self {
+        Self::OptIn
+    }
+}
 
 /// An enum representing the possible values of an `PaymentPagesCheckoutSessionCustomerDetails`'s `tax_exempt` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -2994,6 +3171,11 @@ impl AsRef<str> for PaymentPagesCheckoutSessionCustomerDetailsTaxExempt {
 impl std::fmt::Display for PaymentPagesCheckoutSessionCustomerDetailsTaxExempt {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PaymentPagesCheckoutSessionCustomerDetailsTaxExempt {
+    fn default() -> Self {
+        Self::Exempt
     }
 }
 
@@ -3732,6 +3914,13 @@ impl std::fmt::Display for PaymentPagesCheckoutSessionShippingAddressCollectionA
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for PaymentPagesCheckoutSessionShippingAddressCollectionAllowedCountries
+{
+    fn default() -> Self {
+        Self::Ac
+    }
+}
 
 /// An enum representing the possible values of an `PaymentPagesCheckoutSessionTaxId`'s `type` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -3841,5 +4030,10 @@ impl AsRef<str> for PaymentPagesCheckoutSessionTaxIdType {
 impl std::fmt::Display for PaymentPagesCheckoutSessionTaxIdType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PaymentPagesCheckoutSessionTaxIdType {
+    fn default() -> Self {
+        Self::AeTrn
     }
 }

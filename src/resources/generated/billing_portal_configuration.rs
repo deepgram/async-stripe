@@ -8,7 +8,7 @@ use crate::ids::BillingPortalConfigurationId;
 use crate::params::{Metadata, Object, Timestamp};
 
 /// The resource representing a Stripe "PortalConfiguration".
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct BillingPortalConfiguration {
     /// Unique identifier for the object.
     pub id: BillingPortalConfigurationId,
@@ -65,7 +65,7 @@ impl Object for BillingPortalConfiguration {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalBusinessProfile {
     /// The messaging shown to customers in the portal.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -78,7 +78,7 @@ pub struct PortalBusinessProfile {
     pub terms_of_service_url: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalFeatures {
     pub customer_update: PortalCustomerUpdate,
 
@@ -93,7 +93,7 @@ pub struct PortalFeatures {
     pub subscription_update: PortalSubscriptionUpdate,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalCustomerUpdate {
     /// The types of customer updates that are supported.
     ///
@@ -104,19 +104,19 @@ pub struct PortalCustomerUpdate {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalInvoiceList {
     /// Whether the feature is enabled.
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalPaymentMethodUpdate {
     /// Whether the feature is enabled.
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalSubscriptionCancel {
     pub cancellation_reason: PortalSubscriptionCancellationReason,
 
@@ -132,7 +132,7 @@ pub struct PortalSubscriptionCancel {
     pub proration_behavior: PortalSubscriptionCancelProrationBehavior,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalSubscriptionCancellationReason {
     /// Whether the feature is enabled.
     pub enabled: bool,
@@ -141,13 +141,13 @@ pub struct PortalSubscriptionCancellationReason {
     pub options: Vec<PortalSubscriptionCancellationReasonOptions>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalSubscriptionPause {
     /// Whether the feature is enabled.
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalSubscriptionUpdate {
     /// The types of subscription updates that are supported for items listed in the `products` attribute.
     ///
@@ -167,7 +167,7 @@ pub struct PortalSubscriptionUpdate {
     pub proration_behavior: PortalSubscriptionUpdateProrationBehavior,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PortalSubscriptionUpdateProduct {
     /// The list of price IDs which, when subscribed to, a subscription can be updated.
     pub prices: Vec<String>,
@@ -210,6 +210,11 @@ impl std::fmt::Display for PortalCustomerUpdateAllowedUpdates {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PortalCustomerUpdateAllowedUpdates {
+    fn default() -> Self {
+        Self::Address
+    }
+}
 
 /// An enum representing the possible values of an `PortalSubscriptionCancel`'s `mode` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -237,6 +242,11 @@ impl AsRef<str> for PortalSubscriptionCancelMode {
 impl std::fmt::Display for PortalSubscriptionCancelMode {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PortalSubscriptionCancelMode {
+    fn default() -> Self {
+        Self::AtPeriodEnd
     }
 }
 
@@ -268,6 +278,11 @@ impl AsRef<str> for PortalSubscriptionCancelProrationBehavior {
 impl std::fmt::Display for PortalSubscriptionCancelProrationBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PortalSubscriptionCancelProrationBehavior {
+    fn default() -> Self {
+        Self::AlwaysInvoice
     }
 }
 
@@ -311,6 +326,11 @@ impl std::fmt::Display for PortalSubscriptionCancellationReasonOptions {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PortalSubscriptionCancellationReasonOptions {
+    fn default() -> Self {
+        Self::CustomerService
+    }
+}
 
 /// An enum representing the possible values of an `PortalSubscriptionUpdate`'s `default_allowed_updates` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -342,6 +362,11 @@ impl std::fmt::Display for PortalSubscriptionUpdateDefaultAllowedUpdates {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for PortalSubscriptionUpdateDefaultAllowedUpdates {
+    fn default() -> Self {
+        Self::Price
+    }
+}
 
 /// An enum representing the possible values of an `PortalSubscriptionUpdate`'s `proration_behavior` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -371,5 +396,10 @@ impl AsRef<str> for PortalSubscriptionUpdateProrationBehavior {
 impl std::fmt::Display for PortalSubscriptionUpdateProrationBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for PortalSubscriptionUpdateProrationBehavior {
+    fn default() -> Self {
+        Self::AlwaysInvoice
     }
 }

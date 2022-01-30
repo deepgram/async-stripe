@@ -16,7 +16,7 @@ use crate::resources::{
 /// The resource representing a Stripe "Invoice".
 ///
 /// For more details see <https://stripe.com/docs/api/invoices/object>
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct Invoice {
     /// Unique identifier for the object.
     #[serde(default = "InvoiceId::none")]
@@ -434,7 +434,7 @@ impl Object for Invoice {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AutomaticTax {
     /// Whether Stripe automatically computes tax on this invoice.
     pub enabled: bool,
@@ -444,7 +444,7 @@ pub struct AutomaticTax {
     pub status: Option<Box<AutomaticTaxStatus>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct DiscountsResourceDiscountAmount {
     /// The amount, in %s, of the discount.
     pub amount: i64,
@@ -453,7 +453,7 @@ pub struct DiscountsResourceDiscountAmount {
     pub discount: Expandable<Discount>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoiceSettingCustomField {
     /// The name of the custom field.
     pub name: String,
@@ -462,7 +462,7 @@ pub struct InvoiceSettingCustomField {
     pub value: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct TaxAmount {
     /// The amount, in %s, of the tax.
     pub amount: i64,
@@ -474,7 +474,7 @@ pub struct TaxAmount {
     pub tax_rate: Expandable<TaxRate>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoiceThresholdReason {
     /// The total invoice amount threshold boundary if it triggered the threshold invoice.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -484,7 +484,7 @@ pub struct InvoiceThresholdReason {
     pub item_reasons: Vec<InvoiceItemThresholdReason>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoiceItemThresholdReason {
     /// The IDs of the line items that triggered the threshold invoice.
     pub line_item_ids: Vec<String>,
@@ -493,7 +493,7 @@ pub struct InvoiceItemThresholdReason {
     pub usage_gte: i64,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoiceTransferData {
     /// The amount in %s that will be transferred to the destination account when the invoice is paid.
     ///
@@ -505,7 +505,7 @@ pub struct InvoiceTransferData {
     pub destination: Expandable<Account>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoicesPaymentSettings {
     /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -519,7 +519,7 @@ pub struct InvoicesPaymentSettings {
     pub payment_method_types: Option<Box<Vec<InvoicesPaymentSettingsPaymentMethodTypes>>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoicesPaymentMethodOptions {
     /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -534,7 +534,7 @@ pub struct InvoicesPaymentMethodOptions {
     pub card: Option<Box<InvoicePaymentMethodOptionsCard>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoicePaymentMethodOptionsCard {
     /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication).
     ///
@@ -544,7 +544,7 @@ pub struct InvoicePaymentMethodOptionsCard {
     pub request_three_d_secure: Option<Box<InvoicePaymentMethodOptionsCardRequestThreeDSecure>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoicesResourceInvoiceTaxId {
     /// The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, or `unknown`.
     #[serde(rename = "type")]
@@ -555,7 +555,7 @@ pub struct InvoicesResourceInvoiceTaxId {
     pub value: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct InvoicesStatusTransitions {
     /// The time that the invoice draft was finalized.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -806,19 +806,19 @@ impl<'a> ListInvoices<'a> {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoiceAutomaticTax {
     pub enabled: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoiceCustomFields {
     pub name: String,
 
     pub value: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoiceDiscounts {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub coupon: Option<Box<String>>,
@@ -827,7 +827,7 @@ pub struct CreateInvoiceDiscounts {
     pub discount: Option<Box<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_method_options: Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptions>>,
@@ -836,7 +836,7 @@ pub struct CreateInvoicePaymentSettings {
     pub payment_method_types: Option<Box<Vec<CreateInvoicePaymentSettingsPaymentMethodTypes>>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoiceTransferData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub amount: Option<Box<i64>>,
@@ -844,7 +844,7 @@ pub struct CreateInvoiceTransferData {
     pub destination: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettingsPaymentMethodOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub acss_debit: Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebit>>,
@@ -856,7 +856,7 @@ pub struct CreateInvoicePaymentSettingsPaymentMethodOptions {
     pub card: Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptionsCard>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebit {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mandate_options:
@@ -867,21 +867,21 @@ pub struct CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebit {
         Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebitVerificationMethod>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettingsPaymentMethodOptionsBancontact {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub preferred_language:
         Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptionsBancontactPreferredLanguage>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettingsPaymentMethodOptionsCard {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub request_three_d_secure:
         Option<Box<CreateInvoicePaymentSettingsPaymentMethodOptionsCardRequestThreeDSecure>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebitMandateOptions {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction_type: Option<
@@ -919,6 +919,11 @@ impl std::fmt::Display for AutomaticTaxStatus {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for AutomaticTaxStatus {
+    fn default() -> Self {
+        Self::Complete
+    }
+}
 
 /// An enum representing the possible values of an `Invoice`'s `collection_method` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -946,6 +951,11 @@ impl AsRef<str> for CollectionMethod {
 impl std::fmt::Display for CollectionMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for CollectionMethod {
+    fn default() -> Self {
+        Self::ChargeAutomatically
     }
 }
 
@@ -981,6 +991,13 @@ impl std::fmt::Display
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebitMandateOptionsTransactionType
+{
+    fn default() -> Self {
+        Self::Business
+    }
+}
 
 /// An enum representing the possible values of an `CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebit`'s `verification_method` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1012,6 +1029,13 @@ impl std::fmt::Display
 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default
+    for CreateInvoicePaymentSettingsPaymentMethodOptionsAcssDebitVerificationMethod
+{
+    fn default() -> Self {
+        Self::Automatic
     }
 }
 
@@ -1049,6 +1073,13 @@ impl std::fmt::Display
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default
+    for CreateInvoicePaymentSettingsPaymentMethodOptionsBancontactPreferredLanguage
+{
+    fn default() -> Self {
+        Self::De
+    }
+}
 
 /// An enum representing the possible values of an `CreateInvoicePaymentSettingsPaymentMethodOptionsCard`'s `request_three_d_secure` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1078,6 +1109,13 @@ impl AsRef<str> for CreateInvoicePaymentSettingsPaymentMethodOptionsCardRequestT
 impl std::fmt::Display for CreateInvoicePaymentSettingsPaymentMethodOptionsCardRequestThreeDSecure {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default
+    for CreateInvoicePaymentSettingsPaymentMethodOptionsCardRequestThreeDSecure
+{
+    fn default() -> Self {
+        Self::Any
     }
 }
 
@@ -1135,6 +1173,11 @@ impl std::fmt::Display for CreateInvoicePaymentSettingsPaymentMethodTypes {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for CreateInvoicePaymentSettingsPaymentMethodTypes {
+    fn default() -> Self {
+        Self::AchCreditTransfer
+    }
+}
 
 /// An enum representing the possible values of an `Invoice`'s `billing_reason` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1180,6 +1223,11 @@ impl std::fmt::Display for InvoiceBillingReason {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for InvoiceBillingReason {
+    fn default() -> Self {
+        Self::AutomaticPendingInvoiceItemInvoice
+    }
+}
 
 /// An enum representing the possible values of an `Invoice`'s `customer_tax_exempt` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1211,6 +1259,11 @@ impl std::fmt::Display for InvoiceCustomerTaxExempt {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for InvoiceCustomerTaxExempt {
+    fn default() -> Self {
+        Self::Exempt
+    }
+}
 
 /// An enum representing the possible values of an `InvoicePaymentMethodOptionsCard`'s `request_three_d_secure` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1238,6 +1291,11 @@ impl AsRef<str> for InvoicePaymentMethodOptionsCardRequestThreeDSecure {
 impl std::fmt::Display for InvoicePaymentMethodOptionsCardRequestThreeDSecure {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for InvoicePaymentMethodOptionsCardRequestThreeDSecure {
+    fn default() -> Self {
+        Self::Any
     }
 }
 
@@ -1277,6 +1335,11 @@ impl std::fmt::Display for InvoiceStatus {
         self.as_str().fmt(f)
     }
 }
+impl std::default::Default for InvoiceStatus {
+    fn default() -> Self {
+        Self::Deleted
+    }
+}
 
 /// An enum representing the possible values of an `ListInvoices`'s `status` field.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
@@ -1310,6 +1373,11 @@ impl AsRef<str> for InvoiceStatusFilter {
 impl std::fmt::Display for InvoiceStatusFilter {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for InvoiceStatusFilter {
+    fn default() -> Self {
+        Self::Draft
     }
 }
 
@@ -1363,6 +1431,11 @@ impl AsRef<str> for InvoicesPaymentSettingsPaymentMethodTypes {
 impl std::fmt::Display for InvoicesPaymentSettingsPaymentMethodTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for InvoicesPaymentSettingsPaymentMethodTypes {
+    fn default() -> Self {
+        Self::AchCreditTransfer
     }
 }
 
@@ -1474,5 +1547,10 @@ impl AsRef<str> for TaxIdType {
 impl std::fmt::Display for TaxIdType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         self.as_str().fmt(f)
+    }
+}
+impl std::default::Default for TaxIdType {
+    fn default() -> Self {
+        Self::AeTrn
     }
 }
